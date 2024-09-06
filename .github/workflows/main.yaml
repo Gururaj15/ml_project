@@ -7,6 +7,9 @@ on:
     paths-ignore:
       - 'README.md'
 
+env:
+  AWS_REGION: us-east-1
+
 permissions:
   id-token: write
   contents: read
@@ -43,7 +46,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Make sure this secret is configured
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Make sure this secret is configured
-          aws-region: us-east-1  # Make sure this secret is configured
+          aws-region: ${{ env.AWS_REGION }}  # Make sure this secret is configured
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -72,7 +75,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
         id: login-ecr
